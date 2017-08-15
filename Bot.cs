@@ -11,7 +11,7 @@ namespace TelegramBot
     class Bot
     {
         WebClient webClient = new WebClient();
-        string startUrl = $"https://api.telegram.org/bot349767489:AAFH2i94VcV9bl3RgTILJugxv6mYNTSEip8";
+        string startUrl;
 
         public string StartUrl { get => startUrl; set => startUrl = value; }
 
