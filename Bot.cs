@@ -12,22 +12,19 @@ namespace TelegramBot
     {
         WebClient webClient = new WebClient();
 
-        public string StartUrl;
+        private static string startUrl;
 
-        public Bot (string url)
-        {
-            StartUrl = url;
-        }
+        public  string StartUrl { get => startUrl; set => startUrl = value; }
 
         public void SendMsg(string messageFromId, string messageText)
         {
-            string url = $"{StartUrl}/sendMessage?chat_id={messageFromId}&text={messageText}";
+            string url = $"{startUrl}/sendMessage?chat_id={messageFromId}&text={messageText}";
             webClient.DownloadString(url);
         }
 
         public void SendPhoto(string messageFromId, string url)
         {
-            string url1 = $"{StartUrl}/sendPhoto?chat_id={messageFromId}&photo={url}";
+            string url1 = $"{startUrl}/sendPhoto?chat_id={messageFromId}&photo={url}";
             webClient.DownloadString(url1);
         }
 
@@ -37,7 +34,7 @@ namespace TelegramBot
             List<TelegramResponse> msgList = new List<TelegramResponse>();
             while (true)
             {
-                string url = $"{StartUrl}/getUpdates?offset={update_id + 1}";
+                string url = $"{startUrl}/getUpdates?offset={update_id + 1}";
                 string response = webClient.DownloadString(url);
                 var responseObject = JsonConvert.DeserializeObject<TelegramResponse>(response);
                 var mes = responseObject.result;
@@ -48,9 +45,9 @@ namespace TelegramBot
                     foreach (var item in mes)
                     {
                         update_id = item.update_id;
-                        webClient.DownloadString($"{StartUrl}/getUpdates?offset={update_id}");
+                        webClient.DownloadString($"{startUrl}/getUpdates?offset={update_id}");
                     }
-                    webClient.DownloadString($"{StartUrl}/getUpdates?offset={update_id + 1}");
+                    webClient.DownloadString($"{startUrl}/getUpdates?offset={update_id + 1}");
                 }
                 else
                 {

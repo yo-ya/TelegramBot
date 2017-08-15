@@ -12,8 +12,10 @@ namespace TelegramBot
 
         static void Main(string[] args)
         {
-            Bot bot = new Bot("https://api.telegram.org/bot349767489:AAFH2i94VcV9bl3RgTILJugxv6mYNTSEip8");
-            //bot.StartUrl = "https://api.telegram.org/bot349767489:AAFH2i94VcV9bl3RgTILJugxv6mYNTSEip8";
+            Bot bot = new Bot();
+            bot.StartUrl = "https://api.telegram.org/bot349767489:AAFH2i94VcV9bl3RgTILJugxv6mYNTSEip8";
+            Bot bot1 = new Bot();
+            Console.WriteLine(bot1.StartUrl);
             List <TelegramResponse> list = new List<TelegramResponse>();
             list = bot.Get_msg();
             while (true)

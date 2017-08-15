@@ -10,7 +10,7 @@ namespace TelegramBot
 {
     class Comm
     {
-        Bot c = new Bot("https://api.telegram.org/bot349767489:AAFH2i94VcV9bl3RgTILJugxv6mYNTSEip8");
+        Bot c = new Bot();
         TelegramResponse msg = new TelegramResponse();
         WebClient webClient = new WebClient();
         public string Udaff()
