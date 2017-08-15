@@ -10,7 +10,7 @@ namespace TelegramBot
 {
     class Comm
     {
-        Bot c = new Bot();
+        Bot c = new Bot("https://api.telegram.org/bot349767489:AAFH2i94VcV9bl3RgTILJugxv6mYNTSEip8");
         TelegramResponse msg = new TelegramResponse();
         WebClient webClient = new WebClient();
         public string Udaff()
@@ -24,15 +24,31 @@ namespace TelegramBot
 
         public void ComResp(TelegramResponse msg)
         {
-
-            if (msg.result.First().message.text == "удаф")
+            string word = msg.result.First().message.text;
+            string messageType = msg.result.First().message.chat.type;
+            int chatId = msg.result.First().message.chat.id;
+            int fromId = msg.result.First().message.from.id;
+            switch (word)
             {
-                c.SendPhoto((msg.result.First().message.chat.type == "group" ? msg.result.First().message.chat.id : msg.result.First().message.from.id).ToString(), Udaff());
+                case "удаф":
+                    {
+                        c.SendPhoto((messageType == "group" ? chatId : fromId).ToString(), Udaff());
+                        break;
+                    }
+                case "да":
+                    {
+                        c.SendMsg((messageType == "group" ? chatId : fromId).ToString(), "манда!");
+                        break;
+                    }
             }
-            if (msg.result.First().message.text == "да")
-            {
-                c.SendMsg((msg.result.First().message.chat.type == "group" ? msg.result.First().message.chat.id : msg.result.First().message.from.id).ToString(), "манда!");
-            }
+            //if (msg.result.First().message.text == "удаф")
+            //{
+            //    c.SendPhoto((msg.result.First().message.chat.type == "group" ? msg.result.First().message.chat.id : msg.result.First().message.from.id).ToString(), Udaff());
+            //}
+            //if (msg.result.First().message.text == "да")
+            //{
+            //    c.SendMsg((msg.result.First().message.chat.type == "group" ? msg.result.First().message.chat.id : msg.result.First().message.from.id).ToString(), "манда!");
+            //}
         }
     }
 }
