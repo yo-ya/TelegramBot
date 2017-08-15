@@ -1,0 +1,8 @@
+E:\Учеба\Проекты\TelegramBot\TelegramBot\TelegramBot\obj\Debug\TelegramBot.csprojResolveAssemblyReference.cache
+E:\Учеба\Проекты\TelegramBot\TelegramBot\TelegramBot\bin\Debug\TelegramBot.exe.config
+E:\Учеба\Проекты\TelegramBot\TelegramBot\TelegramBot\bin\Debug\TelegramBot.exe
+E:\Учеба\Проекты\TelegramBot\TelegramBot\TelegramBot\bin\Debug\TelegramBot.pdb
+E:\Учеба\Проекты\TelegramBot\TelegramBot\TelegramBot\bin\Debug\Newtonsoft.Json.dll
+E:\Учеба\Проекты\TelegramBot\TelegramBot\TelegramBot\bin\Debug\Newtonsoft.Json.xml
+E:\Учеба\Проекты\TelegramBot\TelegramBot\TelegramBot\obj\Debug\TelegramBot.exe
+E:\Учеба\Проекты\TelegramBot\TelegramBot\TelegramBot\obj\Debug\TelegramBot.pdb
