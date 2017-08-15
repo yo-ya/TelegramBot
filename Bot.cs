@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,32 +27,26 @@ namespace TelegramBot
             webClient.DownloadString(url1);
         }
 
-        public List<Msg> Get_msg()
+        public List<TelegramResponse> Get_msg()
         {
             int update_id = 0;
-            List<Msg> msgList = new List<Msg>();
+            List<TelegramResponse> msgList = new List<TelegramResponse>();
             while (true)
             {
                 string url = $"{startUrl}/getUpdates?offset={update_id + 1}";
                 string response = webClient.DownloadString(url);
-                if ((response != $"{{\"ok\":true,\"result\":[]}}"))
+                var responseObject = JsonConvert.DeserializeObject<TelegramResponse>(response);
+                var mes = responseObject.result;
+                msgList.Add(responseObject);
+                if (mes.Count > 0)
                 {
-                    var col = JObject.Parse(response)["result"].ToArray();
-                    foreach (var ans in col)
+                    update_id = mes.First().update_id;
+                    foreach (var item in mes)
                     {
-                        update_id = Convert.ToInt32(ans["update_id"]);
-                        try
-                        {
-                            Msg msg = new Msg();
-                            msg.UpdateId = Convert.ToInt32(update_id);
-                            msg.FromId = ans["message"]["from"]["id"].ToString();
-                            msg.Text = ans["message"]["text"].ToString();
-                            msg.Type = ans["message"]["chat"]["type"].ToString();
-                            msg.ChatId = ans["message"]["chat"]["id"].ToString();
-                            msgList.Add(msg);
-                        }
-                        catch { }
+                        update_id = item.update_id;
+                        webClient.DownloadString($"{startUrl}/getUpdates?offset={update_id}");
                     }
+                    webClient.DownloadString($"{startUrl}/getUpdates?offset={update_id + 1}");
                 }
                 else
                 {

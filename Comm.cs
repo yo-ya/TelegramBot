@@ -11,7 +11,7 @@ namespace TelegramBot
     class Comm
     {
         Bot c = new Bot();
-        Msg msg = new Msg();
+        TelegramResponse msg = new TelegramResponse();
         WebClient webClient = new WebClient();
         public string Udaff()
         {
@@ -22,16 +22,16 @@ namespace TelegramBot
             return "http://udaff.com/" + match.ToString();
         }
 
-        public void ComResp(Msg msg)
+        public void ComResp(TelegramResponse msg)
         {
 
-            if (msg.Text == "удаф")
+            if (msg.result.First().message.text == "удаф")
             {
-                c.SendPhoto((msg.Type == "group" ? msg.ChatId : msg.FromId), Udaff());
+                c.SendPhoto((msg.result.First().message.chat.type == "group" ? msg.result.First().message.chat.id : msg.result.First().message.from.id).ToString(), Udaff());
             }
-            if (msg.Text == "да")
+            if (msg.result.First().message.text == "да")
             {
-                c.SendMsg((msg.Type == "group" ? msg.ChatId : msg.FromId), "манда!");
+                c.SendMsg((msg.result.First().message.chat.type == "group" ? msg.result.First().message.chat.id : msg.result.First().message.from.id).ToString(), "манда!");
             }
         }
     }

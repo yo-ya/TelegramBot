@@ -13,16 +13,19 @@ namespace TelegramBot
         static void Main(string[] args)
         {
             Bot bot = new Bot();
-            List<Msg> list = new List<Msg>();
-            list = bot.Get_msg(); //init
+            List<TelegramResponse> list = new List<TelegramResponse>();
+            list = bot.Get_msg();
             while (true)
             {
                 list = bot.Get_msg();
                 foreach (var item in list)
                 {
-                    Comm m = new Comm();
-                    m.ComResp(item);
-
+                    if (item.result.Count > 0)
+                    {
+                        Console.WriteLine(item.result.First().message.text);
+                        Comm m = new Comm();
+                        m.ComResp(item);
+                    }
                 }
                 Thread.Sleep(100);
             }
